@@ -12,7 +12,7 @@ class AdminLoginPage {
     cy.get('input[name="password"]').type(password)
   }
 
- submit() {
+submit() {
   cy.get('button[type="submit"]').click();
 }
 

@@ -16,3 +16,22 @@ Then("I should see the dashboard", () => {
     .should('include', '/admin/dashboard')
 });
 
+When("I login with {string} and {string}", (email, password) => {
+  if (email) {
+    AdminLoginPage.fillEmail(email);
+  }
+
+  if (password) {
+    AdminLoginPage.fillPassword(password);
+  }
+
+  AdminLoginPage.submit();
+});
+
+Then("I should see an authentication error", () => {
+  cy.location("pathname", { timeout: 10000 })
+    .should("include", "/admin/login");
+});
+
+
+
