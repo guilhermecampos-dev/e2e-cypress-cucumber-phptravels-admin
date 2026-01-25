@@ -1,24 +1,29 @@
-class AdminLoginPage {
+import BasePage from "./BasePage";
+class AdminLoginPage extends BasePage {
 
-  visit() {
-    cy.visit('/admin/login')
+  visitLoginPage() {
+    this.visit('/admin/login')
+  }
+
+  login(email, password){
+    this.fillEmail(email)
+    this.fillPassword(password)
+    this.submit()
   }
 
   fillEmail(email) {
-    cy.get('input[name="email"]').type(email)
+    this.get('input[name="email"]').type(email)
   }
 
   fillPassword(password) {
-    cy.get('input[name="password"]').type(password)
+    this.get('input[name="password"]').type(password)
   }
 
 submit() {
-  cy.get('button[type="submit"]').click();
+  this.get('button[type="submit"]').click();
 }
 
-dashboardShouldBeVisible() {
-  cy.contains('Dashboard', { timeout: 15000 }).should('be.visible');
-}
+
 }
 
 export default new AdminLoginPage()

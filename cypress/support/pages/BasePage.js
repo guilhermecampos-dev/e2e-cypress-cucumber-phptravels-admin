@@ -8,6 +8,10 @@ class BasePage{
     }
 
     contains(text){
-        return cy.contains(text)
+        return cy.contains(text).should('be.visible')
+    }
+
+    urlShouldInclude(path){
+        cy.location('pathname').should('include', path)
     }
 }export default BasePage

@@ -2,7 +2,7 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import AdminLoginPage from "../pages/AdminLoginPage";
 
 Given("I access the admin login page", () => {
-  AdminLoginPage.visit();
+  AdminLoginPage.visitLoginPage();
 });
 
 When("I login with valid credentials", () => {
@@ -32,6 +32,10 @@ Then("I should see an authentication error", () => {
   cy.location("pathname", { timeout: 10000 })
     .should("include", "/admin/login");
 });
+
+Then('I should see the dashboard', () => {
+  dashboardPage.dashboardShouldBeVisible()
+})
 
 
 
