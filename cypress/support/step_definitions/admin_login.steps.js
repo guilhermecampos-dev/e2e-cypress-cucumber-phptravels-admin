@@ -6,8 +6,8 @@ Given("I access the admin login page", () => {
 });
 
 When("I login with valid credentials", () => {
-  AdminLoginPage.fillEmail("admin@phptravels.com");
-  AdminLoginPage.fillPassword("demoadmin");
+  AdminLoginPage.fillEmail(Cypress.env("ADMIN_EMAIL"));
+  AdminLoginPage.fillPassword(Cypress.env("ADMIN_PASSWORD"));
   AdminLoginPage.submit();
 });
 
@@ -15,3 +15,4 @@ Then("I should see the dashboard", () => {
   cy.location('pathname', { timeout: 15000 })
     .should('include', '/admin/dashboard')
 });
+
