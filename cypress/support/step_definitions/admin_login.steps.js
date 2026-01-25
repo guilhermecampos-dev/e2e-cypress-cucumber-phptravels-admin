@@ -1,14 +1,18 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import AdminLoginPage from "../pages/AdminLoginPage";
+import DashboardPage from "../pages/DashboardPage";
+
+const adminloginpage = new AdminLoginPage()
+const dashboardpage = new DashboardPage()
 
 Given("I access the admin login page", () => {
-  AdminLoginPage.visitLoginPage();
+  adminloginpage.visitLoginPage();
 });
 
 When("I login with valid credentials", () => {
-  AdminLoginPage.fillEmail(Cypress.env("ADMIN_EMAIL"));
-  AdminLoginPage.fillPassword(Cypress.env("ADMIN_PASSWORD"));
-  AdminLoginPage.submit();
+  adminloginpage.fillEmail(Cypress.env("ADMIN_EMAIL"));
+  adminloginpage.fillPassword(Cypress.env("ADMIN_PASSWORD"));
+  adminloginpage.submit();
 });
 
 Then("I should see the dashboard", () => {
@@ -18,14 +22,14 @@ Then("I should see the dashboard", () => {
 
 When("I login with {string} and {string}", (email, password) => {
   if (email) {
-    AdminLoginPage.fillEmail(email);
+    adminloginpage.fillEmail(email);
   }
 
   if (password) {
-    AdminLoginPage.fillPassword(password);
+    adminloginpage.fillPassword(password);
   }
 
-  AdminLoginPage.submit();
+  adminloginpage.submit();
 });
 
 Then("I should see an authentication error", () => {
@@ -34,7 +38,7 @@ Then("I should see an authentication error", () => {
 });
 
 Then('I should see the dashboard', () => {
-  dashboardPage.dashboardShouldBeVisible()
+  dashboardpage.dashboardShouldBeVisible()
 })
 
 

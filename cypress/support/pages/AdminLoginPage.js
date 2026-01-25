@@ -1,4 +1,4 @@
-import BasePage from "./BasePage";
+import BasePage from './BasePage'
 class AdminLoginPage extends BasePage {
 
   visitLoginPage() {
@@ -24,6 +24,4 @@ submit() {
 }
 
 
-}
-
-export default new AdminLoginPage()
+}export default AdminLoginPage
