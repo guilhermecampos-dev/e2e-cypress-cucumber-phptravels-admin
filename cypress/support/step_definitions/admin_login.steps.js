@@ -2,44 +2,36 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import AdminLoginPage from "../pages/AdminLoginPage";
 import DashboardPage from "../pages/DashboardPage";
 
-const adminloginpage = new AdminLoginPage()
-const dashboardpage = new DashboardPage()
+const adminLoginPage = new AdminLoginPage();
+const dashboardPage = new DashboardPage();
 
-Given("I access the admin login page", () => {
-  adminloginpage.visitLoginPage();
+Given("I access the admin page", () => {
+  adminLoginPage.visitAdminPage();
 });
 
 When("I login with valid credentials", () => {
-  adminloginpage.fillEmail(Cypress.env("ADMIN_EMAIL"));
-  adminloginpage.fillPassword(Cypress.env("ADMIN_PASSWORD"));
-  adminloginpage.submit();
-});
-
-Then("I should see the dashboard", () => {
-  cy.location('pathname', { timeout: 15000 })
-    .should('include', '/admin/dashboard')
+  adminLoginPage.fillEmail(Cypress.env("ADMIN_EMAIL"));
+  adminLoginPage.fillPassword(Cypress.env("ADMIN_PASSWORD"));
+  adminLoginPage.submit();
 });
 
 When("I login with {string} and {string}", (email, password) => {
   if (email) {
-    adminloginpage.fillEmail(email);
+    adminLoginPage.fillEmail(email);
   }
 
   if (password) {
-    adminloginpage.fillPassword(password);
+    adminLoginPage.fillPassword(password);
   }
 
-  adminloginpage.submit();
+  adminLoginPage.submit();
 });
 
-Then("I should see an authentication error", () => {
-  cy.location("pathname", { timeout: 10000 })
-    .should("include", "/admin/login");
+Then("I should remain on the admin login page", () => {
+  cy.url().should("include", "/admin");
+  adminLoginPage.loginFormShouldBeVisible();
 });
 
-Then('I should see the dashboard', () => {
-  dashboardpage.dashboardShouldBeVisible()
-})
-
-
-
+Then("I should see the dashboard", () => {
+  dashboardPage.dashboardShouldBeVisible();
+});

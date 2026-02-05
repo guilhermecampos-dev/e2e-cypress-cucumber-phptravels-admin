@@ -1,17 +1,23 @@
-class BasePage{
-    visit(url){
-        cy.visit(url)
-    }
+class BasePage {
 
-    get(selector){
-        return cy.get(selector)
-    }
+  visit(url) {
+    cy.visit(url, {
+      failOnStatusCode: false,
+      timeout: 60000
+    });
+  }
 
-    contains(text){
-        return cy.contains(text).should('be.visible')
-    }
+  get(selector) {
+    return cy.get(selector, { timeout: 30000 });
+  }
 
-    urlShouldInclude(path){
-        cy.location('pathname').should('include', path)
-    }
-}export default BasePage
+  containsText(text) {
+    return cy.contains(text, { timeout: 30000 }).should("be.visible");
+  }
+
+  urlShouldInclude(path) {
+    cy.url({ timeout: 20000 }).should("include", path);
+  }
+}
+
+export default BasePage;

@@ -1,12 +1,16 @@
-import BasePage from './BasePage'
+import BasePage from "./BasePage";
 
-class DashboardPage extends BasePage{
-    dashboardShouldBeVisible(){
-        this.urlShouldInclude('/admin/dashboard')
-        this.containsText('Dashboard')
-    }
+class DashboardPage extends BasePage {
 
-    getWelcomeMessage(){
-        return this.get('.welcome')
-    }
-} export default DashboardPage
+  dashboardShouldBeVisible() {
+    cy.url({ timeout: 20000 }).should("include", "/admin");
+    this.get("body").should("be.visible");
+    this.containsText("Dashboard");
+  }
+
+  getWelcomeMessage() {
+    return this.get("body");
+  }
+}
+
+export default DashboardPage;

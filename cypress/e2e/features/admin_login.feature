@@ -5,9 +5,9 @@ Feature: Admin Login
   So that I can manage the system
 
   Scenario Outline: Admin login with invalid credentials
-    Given I access the admin login page
+    Given I access the admin page
     When I login with "<email>" and "<password>"
-    Then I should see an authentication error
+    Then I should remain on the login page
 
     Examples:
       | email                | password     |

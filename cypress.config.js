@@ -8,8 +8,11 @@ const createEsbuildPlugin =
 module.exports = defineConfig({
   e2e: {
     specPattern: "cypress/e2e/**/*.feature",
+    baseUrl: "https://phptravels.net",
+    chromeWebSecurity: false,
 
     async setupNodeEvents(on, config) {
+      // 🥒 Cucumber
       await addCucumberPreprocessorPlugin(on, config);
 
       on(
@@ -19,9 +22,11 @@ module.exports = defineConfig({
         })
       );
 
+      // 🕵️‍♂️ Disfarce de humano
+      config.userAgent =
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36";
+
       return config;
     },
-
-    baseUrl: "https://phptravels.net",
   },
 });
